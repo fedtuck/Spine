@@ -216,7 +216,14 @@ class SaveOperation: Operation {
 				self.state = .Finished
 				return
 			}
-			
+            
+            if let statusCode = statusCode where 400 ... 499 ~= statusCode {
+                let errorResponse = responseData ?? [String:AnyObject]()
+                self.result = Failable(NSError(domain: SpineServerErrorDomain, code: SpineErrorCodes.UnprocessableEntity, userInfo: [NSLocalizedDescriptionKey: errorResponse]))
+                self.state = .Finished
+                return
+            }
+            			
 			// Map the response back onto the resource
 			if let data = responseData {
 				self.serializer.deserializeData(data, mappingTargets: [self.resource])

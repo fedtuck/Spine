@@ -25,6 +25,8 @@ public struct SpineErrorCodes {
 	/// The previous page of a collection is not available.
 	public static let PreviousPageNotAvailable = 11
 	
+    public static let UnprocessableEntity = 422
+    
 	/// The given resource coulde not be found.
 	public static let ResourceNotFound = 404
 }
