@@ -217,9 +217,9 @@ class SaveOperation: Operation {
 				return
 			}
             
-            if let statusCode = statusCode where 400 ... 499 ~= statusCode {
+            if let statusCode = statusCode where 400 ... 599 ~= statusCode {
                 let errorResponse = responseData ?? [String:AnyObject]()
-                self.result = Failable(NSError(domain: SpineServerErrorDomain, code: SpineErrorCodes.UnprocessableEntity, userInfo: [NSLocalizedDescriptionKey: errorResponse]))
+                self.result = Failable(NSError(domain: SpineServerErrorDomain, code: statusCode, userInfo: [NSLocalizedDescriptionKey: errorResponse]))
                 self.state = .Finished
                 return
             }
