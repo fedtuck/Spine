@@ -244,6 +244,9 @@ class SaveOperation: Operation {
 					
 					self.state = .Finished
 				}
+                
+                // Next line added by RH, because completion was never called when updating an entity
+                self.spine.addOperation(relationshipOperation)
 			}
 		}
 	}
